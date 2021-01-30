@@ -26,7 +26,7 @@ to see more information.
 
 ## Swagger API
    * The swagger is located at: https://localhost/docs
-   * A json file is generated here: [swagger.json](config/swagger.json)
+   * A json file is generated here: [swagger.json](api/config/swagger.json)
 
 ## Data Fixtures
    The [Alice](https://github.com/hautelook/AliceBundle) is not compatible for php 8, so it do not contain any fixtures and function test.
