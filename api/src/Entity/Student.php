@@ -8,12 +8,13 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\StudentAverageNote;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ApiResource(
- *      normalizationContext={"groups"={"default"}},
- *     denormalizationContext={"groups"={"default"}},
+ *     normalizationContext={"groups"={"student:read"}},
+ *     denormalizationContext={"groups"={"student:write"}},
  *     collectionOperations={"post"},
  *     itemOperations={
  *          "get",
@@ -35,28 +36,30 @@ class Student
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-     * @Groups("default")
      */
     private int $id;
 
     /**
      * @see _:firstName
      * @ORM\Column(type="string")
-     * @Groups("default")
+     * @Assert\NotBlank(message="First name is required")
+     * @Groups({"student:read", "student:write"})
      */
     private ?string $firstName = null;
 
     /**
      * @see _:lastName
      * @ORM\Column(type="string")
-     * @Groups("default")
+     * @Assert\NotBlank(message="Last name is required")
+     * @Groups({"student:read", "student:write"})
      */
     private ?string $lastName = null;
 
     /**
      * @see _:birthDay
      * @ORM\Column(type="datetime")
-     * @Groups("default")
+     * @Assert\NotBlank(message="Birthday is required")
+     * @Groups({"student:read", "student:write"})
      */
     private ?\DateTime $birthDay = null;
 

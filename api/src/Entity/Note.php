@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass="App\Repository\NoteREpository")
  * @ApiResource(
+ *     denormalizationContext={"groups"={"score:write"}},
+ *     normalizationContext={"groups"={"score:read"}},
  *          collectionOperations={"post"},
  *          itemOperations={"get"},
  *          shortName="note"
@@ -32,8 +35,8 @@ class Note
      *
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
-     * @Assert\LessThan(value=20)
-     * @Assert\GreaterThanOrEqual(value=0)
+     * @Assert\Range(min="0", max="20")
+     * @Groups({"score:write", "score:read", "student:read"})
      */
     private ?int $score = null;
 
@@ -42,6 +45,7 @@ class Note
      *
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Groups({"score:write", "score:read", "student:read"})
      */
     private ?string $subject = null;
 
@@ -50,6 +54,7 @@ class Note
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Student")
      * @ORM\JoinColumn(name="student_id", referencedColumnName="id", nullable=false)
+     * @Groups({"score:write"})
      */
     private ?Student $student = null;
 
