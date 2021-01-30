@@ -25,14 +25,12 @@ class NoteRepository extends ServiceEntityRepository
      */
     public function getAverageNoteForStudent(Student $student): float
     {
-        $result = $this->createQueryBuilder('n')
+        return $this->createQueryBuilder('n')
             ->select('avg(n.score) as score_avg')
             ->andWhere('n.student = :student')
             ->setParameter('student', $student)
             ->getQuery()
-            ->getSingleResult();
-
-        return $result['score_avg'];
+            ->getSingleScalarResult();
     }
 
     /**
@@ -41,14 +39,12 @@ class NoteRepository extends ServiceEntityRepository
      */
     public function getAverageNoteForSubject(string $subject): float
     {
-        $result = $this->createQueryBuilder('n')
+        return $this->createQueryBuilder('n')
             ->select('avg(n.score) as score_avg')
             ->andWhere('n.subject = :subject')
             ->setParameter('subject', $subject)
             ->getQuery()
-            ->getSingleResult();
-
-        return $result['score_avg'];
+            ->getSingleScalarResult();
     }
 
     /**
@@ -57,11 +53,10 @@ class NoteRepository extends ServiceEntityRepository
      */
     public function getAverageNote(): float
     {
-        $result = $this->createQueryBuilder('n')
+        return $this->createQueryBuilder('n')
             ->select('avg(n.score) as score_avg')
             ->getQuery()
-            ->getSingleResult();
+            ->getSingleScalarResult();
 
-        return $result['score_avg'];
     }
 }
