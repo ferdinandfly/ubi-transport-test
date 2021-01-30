@@ -15,7 +15,7 @@ Refer to the [Getting Started Guide](https://api-platform.com/docs/distribution)
 ## Installation
    * clone the project
    * make start
-   * make 
+   * make migration
 ## Usage
    * open navigator to: https://localhost
    
