@@ -1,6 +1,6 @@
 docker_compose_exec = docker-compose exec -T
 docker_php_console=${docker_compose_exec} php bin/console
-
+docker_php = ${docker_compose_exec} php
 ## docker start
 start:
 	docker-compose up -d --remove-orphans
@@ -18,15 +18,19 @@ restart: stop start
 
 ## sync schema to database
 migration:
-	${docker_compose_exec} php bin/console  doctrine:migration:migrate
+	${docker_php} bin/console  doctrine:migration:migrate
 
 ## execute php cs fixer
 php-cs-fixer:
-	${docker_compose_exec} php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
+	${docker_php} tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
 
 ## phpstan
 phpstan:
-	${docker_compose_exec} php vendor/bin/phpstan analyse src tests
+	${docker_php} vendor/bin/phpstan analyse src tests
+
+## php unitTest
+test:
+	${docker_php} bin/phpunit
 
 ## execute
 # Help instructions

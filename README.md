@@ -21,7 +21,7 @@ Refer to the [Getting Started Guide](https://github.com/api-platform/api-platfor
    
 A makefile is in place for common usage, you can use :
         
-        make help 
+    make help 
 to see more information.
 
 ## Swagger API
@@ -29,7 +29,10 @@ to see more information.
    * A json file is generated here: [swagger.json](api/config/swagger.json)
 
 ## Data Fixtures
-   The [Alice](https://github.com/hautelook/AliceBundle) is not compatible for php 8, so it do not contain any fixtures and function test.
+   The [Alice](https://github.com/hautelook/AliceBundle) is not compatible for php 8, so it do not contain any fixtures.
+   To run all functional tests:
+   
+    make test
    
 ## Unit Tests
    The unit test is not needed for no logic exist.
