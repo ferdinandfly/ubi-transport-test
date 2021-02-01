@@ -1,6 +1,7 @@
 docker_compose_exec = docker-compose exec -T
 docker_php_console=${docker_compose_exec} php bin/console
 docker_php = ${docker_compose_exec} php
+
 ## docker start
 start:
 	docker-compose up -d --remove-orphans
@@ -32,13 +33,12 @@ phpstan:
 test:
 	${docker_php} bin/phpunit
 
-## execute
 # Help instructions
 help:
 	@echo "\033[0;33mUsage:\033[0m"
 	@echo "     make [target]\n"
 	@echo "\033[0;33mAvailable targets:\033[0m"
-	@awk '/^[a-zA-Z\-\_0-9\.@]+:/ { \
+	@awk '/^[a-zA-Z\- _0-9\.@]+:/ { \
 		returnMessage = match(n4line, /^# (.*)/); \
 		if (returnMessage) { \
 			printf "\n"; \
